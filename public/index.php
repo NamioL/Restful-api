@@ -1,6 +1,22 @@
 <?php
 
-require_once __DIR__.'../vendor/autolad.php';
+error_reporting(1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+require_once '../vendor/autoload.php';
+
+use App\Application;
+
+$app = new Application();
 
 
+$app->router->get('/costumer/', function () {
+    echo "Hello from the costumer page";
+});
+
+
+
+$app->run();
 ?>
