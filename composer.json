@@ -1,0 +1,9 @@
+{
+    "name": "vaso/restful-api.local",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./"
+        }
+    },
+    "require": {}
+}
