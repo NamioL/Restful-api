@@ -10,9 +10,6 @@ class Router
     public function get($path, $callback)
     {
         $this->allRoutes['get'][$path] = $callback;
-        echo "<pre>";
-        print_r($this->allRoutes);
-        echo "</pre>";
     }
 
     public function resolve(Request $request)
