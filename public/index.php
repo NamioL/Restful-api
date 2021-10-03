@@ -17,8 +17,10 @@ use App\Application;
 
 $app = new Application();
 
+//TODO move somewhere else routes
 
 $app->router->get('/costumer/', [\App\Controllers\CostumerController::class, 'index']);
+$app->router->get('/costumer/show/', [\App\Controllers\CostumerController::class, 'show', 'id']);
 
 
 

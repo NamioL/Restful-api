@@ -3,13 +3,15 @@
 namespace App\DB;
 //TODO add .env file
 
+use PDO;
+
 class Database {
 
-    protected $host = 'localhost';
-    protected $username = 'vaso';
-    protected $password = 'password1234';
-    protected $dbname = 'restful-api';
-    protected $charset = 'utf8mb4';
+    protected string $host = 'localhost';
+    protected string  $username = 'vaso';
+    protected string $password = 'password1234';
+    protected string $dbname = 'restful-api';
+    protected string $charset = 'utf8mb4';
 
     public function pdo()
     {
