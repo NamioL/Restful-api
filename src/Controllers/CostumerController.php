@@ -18,4 +18,26 @@ class CostumerController
 //        TODO add nicer call of custumer I have a time
         echo json_encode((new Costumer())->where('id',$id)->first());
     }
+
+    public function store()
+    {
+//        TODO add request method
+        (new Costumer())->create([[
+            'name' => 'Joe',
+            'surname' => 'Doe',
+            'email' => 'doe@gmail.com'
+        ]]);
+    }
+
+    public function update($id)
+    {
+        (new Costumer())->update([
+            'name' => 'kalo'
+        ],$id);
+    }
+
+    public function delete($id)
+    {
+        (new Costumer())->destroy($id);
+    }
 }
