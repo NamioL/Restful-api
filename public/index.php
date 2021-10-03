@@ -18,9 +18,7 @@ use App\Application;
 $app = new Application();
 
 
-$app->router->get('/costumer/', function () {
-    echo "Hello from the costumer page";
-});
+$app->router->get('/costumer/', [\App\Controllers\CostumerController::class, 'index']);
 
 
 

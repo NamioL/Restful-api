@@ -21,6 +21,19 @@ class Router
             echo "page not found";
             exit;
         }
+        if(gettype($this->allRoutes[$method][$path]) === 'array') {
+            $controller = $this->allRoutes[$method][$path][0] ?? null;
+            $function = $this->allRoutes[$method][$path][1] ?? null;
+            $variable = $this->allRoutes[$method][$path][2] ?? null;
+//            TODO add except erros
+            if($variable) {
+                parse_str($request->getQuery(),$output);
+                $variable = $output[$variable];
+            }
+
+            (new $controller)->$function($variable);
+            exit;
+        }
 
         call_user_func($this->allRoutes[$method][$path]);
         return;
