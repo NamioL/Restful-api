@@ -25,7 +25,7 @@ class Router
             $controller = $this->allRoutes[$method][$path][0] ?? null;
             $function = $this->allRoutes[$method][$path][1] ?? null;
             $variable = $this->allRoutes[$method][$path][2] ?? null;
-
+//            TODO add except erros
             if($variable) {
                 parse_str($request->getQuery(),$output);
                 $variable = $output[$variable];
