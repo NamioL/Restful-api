@@ -3,41 +3,60 @@
 namespace App\Controllers;
 
 use App\Models\Costumer;
+use App\Request;
+use App\Response;
 
 class CostumerController
 {
+    private Request $request;
+
+    public function __construct()
+    {
+        $this->request = new Request();
+    }
+
     public function index()
     {
-//        TODO create response method
-        echo json_encode((new Costumer())->where('name','vaso')->get());
+        $costumers = (new Costumer())->all()->get();
+
+        return new Response(200, $costumers);
     }
 
     public function show($id)
     {
-//        TODO when false add exception with 401
-//        TODO add nicer call of custumer I have a time
-        echo json_encode((new Costumer())->where('id',$id)->first());
+        $costumer = (new Costumer())->where('id', $id)->first();
+        if(empty($costumer)) {
+            return new Response(404, ['error' => 'user could not find']);
+        }
+
+        return new Response(200, $costumer);
     }
 
     public function store()
     {
-//        TODO add request method
-        (new Costumer())->create([[
-            'name' => 'Joe',
-            'surname' => 'Doe',
-            'email' => 'doe@gmail.com'
-        ]]);
+        parse_str($this->request->getQuery(), $data);
+
+        $costumer = (new Costumer())->create([$data]);
+
+        return $costumer ? new Response(200, ['message' => 'costumer added successfully'])
+                         : new Response(402, ['error' => 'something wrong try again later']);
     }
 
     public function update($id)
     {
-        (new Costumer())->update([
-            'name' => 'kalo'
-        ],$id);
+        parse_str($this->request->getQuery(), $data);
+
+        $costumer = (new Costumer())->update($data ,$id);
+
+        return $costumer ? new Response(200, ['message' => 'costumer updated successfully'])
+                         : new Response(402, ['error' => 'something wrong try again later']);
     }
 
     public function delete($id)
     {
-        (new Costumer())->destroy($id);
+        $costumer = (new Costumer())->destroy($id);
+
+        return $costumer ? new Response(200, ['message' => 'costumer deleted successfully'])
+                         : new Response(402, ['error' => 'something wrong try again later']);
     }
 }

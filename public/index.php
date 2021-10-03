@@ -17,13 +17,8 @@ use App\Application;
 
 $app = new Application();
 
-//TODO move somewhere else routes
 
-$app->router->get('/costumer/', [\App\Controllers\CostumerController::class, 'index']);
-$app->router->get('/costumer/show/', [\App\Controllers\CostumerController::class, 'show', 'id']);
-$app->router->get('/costumer/store/', [\App\Controllers\CostumerController::class, 'store']);
-$app->router->get('/costumer/update/', [\App\Controllers\CostumerController::class, 'update', 'id']);
-$app->router->get('/costumer/delete/', [\App\Controllers\CostumerController::class, 'delete', 'id']);
+require_once '../src/Routes.php';
 
 
 

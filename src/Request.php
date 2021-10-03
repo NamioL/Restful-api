@@ -4,6 +4,21 @@ namespace App;
 
 class Request
 {
+    private array $acceptedMethods = ['get', 'post', 'put', 'delete' , 'patch'];
+
+    public function __construct()
+    {
+        if($_SERVER['HTTP_ACCEPT'] !== 'application/json'){
+            echo 'accepts only application json';
+            exit;
+        };
+
+        if(!in_array($this->getMethod(), $this->acceptedMethods)) {
+            echo "Not accepted calling method";
+            exit;
+        }
+    }
+
     public function getPath() :string
     {
         $path = $_SERVER['REQUEST_URI'] ?? '/';
@@ -23,7 +38,6 @@ class Request
 
     public function getMethod() :string
     {
-//        TODO add checks if request method is POST and after if it is delete patch put or only POST
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 }

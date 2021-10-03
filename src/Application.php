@@ -8,7 +8,6 @@ use App\Request;
 class Application
 {
     public Router $router;
-
     function __construct() {
         $this->router = new Router();
     }

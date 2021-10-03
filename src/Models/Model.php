@@ -55,6 +55,8 @@ class Model
             foreach( $arrays as $array ){
                 $stmt->execute( array_values($array) );
             }
+
+            return true;
         } catch(PDOException $e) {
             var_dump($e);
         }
@@ -67,21 +69,7 @@ class Model
             $sql = "UPDATE ".$this->table." SET ".$keys." WHERE id=".$id;
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute( $array );
-
-        } catch(PDOEception $e) {
-            var_dump($e);
-        }
-    }
-
-    public function delete($id)
-    {
-        try {
-            $sql = "UPDATE ".$this->table." SET is_deleted = true WHERE id=".$id;
-            $stmt = $this->pdo->query($sql);
-            $stmt->execute();
-//            $sql = "DELETE FROM ".$this->table." WHERE id= ?";
-//            $stmt = $this->pdo->prepare($sql);
-//            $stmt->execute([$id]);
+            return true;
         } catch(PDOEception $e) {
             var_dump($e);
         }
@@ -93,6 +81,7 @@ class Model
             $sql = "DELETE FROM ".$this->table." WHERE id= ?";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$id]);
+            return true;
         } catch(PDOEception $e) {
             var_dump($e);
         }
